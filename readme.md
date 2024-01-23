@@ -33,3 +33,16 @@ Each test sample contain:
 ### GUI Grounding Pre-training Data for SeeClick
 Check [data](readme_data.md) for the GUI grounding pre-training datasets,
 including the first open source large-scale web GUI grounding corpus collected from Common Crawl.
+
+***
+### Citation
+```
+@misc{cheng2024seeclick,
+      title={SeeClick: Harnessing GUI Grounding for Advanced Visual GUI Agents}, 
+      author={Kanzhi Cheng and Qiushi Sun and Yougang Chu and Fangzhi Xu and Yantao Li and Jianbing Zhang and Zhiyong Wu},
+      year={2024},
+      eprint={2401.10935},
+      archivePrefix={arXiv},
+      primaryClass={cs.HC}
+}
+```
