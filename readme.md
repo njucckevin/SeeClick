@@ -1,13 +1,13 @@
 # SeeClick: Harnessing GUI Grounding for Advanced Visual GUI Agents
 
-The model, data, and code for the paper: "SeeClick: Harnessing GUI Grounding for Advanced Visual GUI Agents"
+The model, data, and code for the paper: [SeeClick: Harnessing GUI Grounding for Advanced Visual GUI Agents](https://arxiv.org/abs/2401.10935)
 
 Release Plans:
 
 - [x] GUI grounding benchmark: *ScreenSpot*
-- [ ] Data for the GUI grounding Pre-training of SeeClick
+- [x] Data for the GUI grounding Pre-training of SeeClick
 - [ ] Inference code & model checkpoint
-
+- [ ] Other code and resources
 
 ***
 ### GUI Grounding Benchmark: *ScreenSpot*
@@ -28,3 +28,8 @@ Each test sample contain:
 #### Evaluation Results
 
 ![Results on *ScreenSpot*](assets/screenspot_result.png)
+
+***
+### GUI Grounding Pre-training Data for SeeClick
+Check [data](readme_data.md) for the GUI grounding pre-training datasets,
+including the first open source large-scale web GUI grounding corpus collected from Common Crawl.
