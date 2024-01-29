@@ -56,6 +56,7 @@ model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-VL-Chat", 
 
 img_path = "assets/test_img.png"
 prompt = "In this UI screenshot, what is the position of the element corresponding to the command \"{}\" (with point)?"
+# prompt = "In this UI screenshot, what is the position of the element corresponding to the command \"{}\" (with bbox)?"  # Use this prompt for generating bounding box
 ref = "add an event"   # response (0.17,0.06)
 ref = "switch to Year"   # response (0.59,0.06)
 ref = "search for events"   # response (0.82,0.06)
@@ -67,6 +68,11 @@ response, history = model.chat(tokenizer, query=query, history=None)
 print(response)
 ```
 The SeeClick's checkpoint can be downloaded on [huggingface](https://huggingface.co/cckevinn/SeeClick/tree/main).
+Please replace the `SeeClick-ckpt-dir` with the actual checkpoint dir. 
+
+The prediction output represents the point of `(x, y)` or the bounding box of `(left, top, right, down)`,
+each value is a [0, 1] decimal number indicating the ratio of the corresponding position to the width or height of the image.
+We recommend using point for prediction because SeeClick is mainly trained for predicting click points in GUIs.
 
 Thanks to [Qwen-VL](https://github.com/QwenLM/Qwen-VL) for their powerful model and wonderful open-sourced work.
 ***
