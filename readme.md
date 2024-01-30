@@ -72,6 +72,7 @@ Please replace the `SeeClick-ckpt-dir` with the actual checkpoint dir.
 
 The prediction output represents the point of `(x, y)` or the bounding box of `(left, top, right, down)`,
 each value is a [0, 1] decimal number indicating the ratio of the corresponding position to the width or height of the image.
+We recommend using point for prediction because SeeClick is mainly trained for predicting click points on GUIs.
 
 Thanks to [Qwen-VL](https://github.com/QwenLM/Qwen-VL) for their powerful model and wonderful open-sourced work.
 ***
