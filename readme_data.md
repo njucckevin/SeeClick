@@ -39,7 +39,7 @@ Each sample contain:
 ***
 ### Web data
 The web data used by SeeClick for training was crawled from websites provided by Common Crawl, containing more than 270k webpage screenshots and over 3 million webpage elements.
-The crawled web screenshots is in [here](https://box.nju.edu.cn/f/6a804cf190dd490a808f/) (include 270k webpage screenshots, 130G), for convenience we also provide a [subset]((https://box.nju.edu.cn/f/813897fc4edc440a9e12/)) of 10,000 images. The annotation elements and text are available at [here](https://box.nju.edu.cn/f/3b0f6ccb8bed476c8e39/).
+The crawled web screenshots is in [here](https://box.nju.edu.cn/f/6a804cf190dd490a808f/) (include 270k webpage screenshots, 130G), for convenience we also provide a [subset](https://box.nju.edu.cn/f/813897fc4edc440a9e12/) of 10,000 images. The annotation elements and text are available at [here](https://box.nju.edu.cn/f/3b0f6ccb8bed476c8e39/).
 
 Each sample contain:
 * `img_filename`: the interface screenshot file
