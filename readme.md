@@ -1,5 +1,10 @@
 # SeeClick: Harnessing GUI Grounding for Advanced Visual GUI Agents
 
+[![arXiv](https://img.shields.io/badge/arXiv-2401.10935-b31b1b.svg)](https://arxiv.org/abs/2401.10935) 
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity) 
+[![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
+[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+
 The model, data, and code for the paper: [SeeClick: Harnessing GUI Grounding for Advanced Visual GUI Agents](https://arxiv.org/abs/2401.10935)
 
 Release Plans:
@@ -27,7 +32,17 @@ Each test sample contain:
 
 #### Evaluation Results
 
-![Results on *ScreenSpot*](assets/screenspot_result.png)
+| LVLMs      | Model Size | GUI Specific | Mobile Text | Mobile Icon/Widget | Desktop Text | Desktop Icon/Widget | Web Text | Web Icon/Widget | Average |
+|------------|------------|--------------|-------------|--------------------|--------------|---------------------|----------|-----------------|---------|
+| MiniGPT-v2 | 7B         | ❌            | 8.4%        | 6.6%               | 6.2%         | 2.9%                | 6.5%     | 3.4%            | 5.7%    |
+| Qwen-VL    | 9.6B       | ❌            | 9.5%        | 4.8%               | 5.7%         | 5.0%                | 3.5%     | 2.4%            | 5.2%    |
+| GPT-4V     | -          | ❌            | 22.6%       | 24.5%              | 20.2%        | 11.8%               | 9.2%     | 8.8%            | 16.2%   |
+| Fuyu       | 8B         | ✅            | 41.0%       | 1.3%               | 33.0%        | 3.6%                | 33.9%    | 4.4%            | 19.5%   |
+| CogAgent   | 18B        | ✅            | 67.0%       | 24.0%              | **74.2%**    | 20.0%               | **70.4%**| 28.6%           | 47.4%   |
+| seek       | 9.6B       | ✅            | **78.0%**   | **52.0%**          | 72.2%        | **30.0%**           | 55.7%    | **32.5%**       | **53.4%**|
+
+
+<!-- ![Results on *ScreenSpot*](assets/screenspot_result.png) -->
 
 ***
 ### GUI Grounding Pre-training Data for SeeClick
