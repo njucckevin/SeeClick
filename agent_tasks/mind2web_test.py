@@ -14,6 +14,8 @@ import argparse
 from PIL import Image
 import numpy as np
 
+logging.basicConfig(level=logging.INFO)
+
 
 # convert action to prediction format (and return the groundtruth bbox)
 def action2step(action, image_size, return_bbox=False):
@@ -78,14 +80,16 @@ random.seed(0)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--model_path', type=str, required=True)
+parser.add_argument('--qwen_path', type=str, required=True)
 parser.add_argument('--imgs_dir', type=str, required=True)
 parser.add_argument('--task', type=str, required=True)
 args = parser.parse_args()
 
 lora_path = args.model_path
+qwen_path = args.qwen_path
 model = AutoPeftModelForCausalLM.from_pretrained(lora_path, device_map="cuda", trust_remote_code=True).eval()
-tokenizer = AutoTokenizer.from_pretrained(lora_path, trust_remote_code=True)
-model.generation_config = GenerationConfig.from_pretrained(lora_path, trust_remote_code=True)
+tokenizer = AutoTokenizer.from_pretrained(qwen_path, trust_remote_code=True)
+model.generation_config = GenerationConfig.from_pretrained(qwen_path, trust_remote_code=True)
 
 mind2web_imgs_dir = args.imgs_dir
 mind2web_test = json.load(open('../data/mind2web_data_test_' + args.task + '.json', 'r'))
@@ -98,7 +102,7 @@ for episode in tqdm(mind2web_test):
     results_actions = []
 
     for j, step in enumerate(episode["actions"]):
-        if "bbox" not in step or "bbox_candidates" not in step:
+        if "bbox" not in step:
             print("action not found")
             continue
 
