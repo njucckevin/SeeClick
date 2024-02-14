@@ -90,6 +90,11 @@ each value is a [0, 1] decimal number indicating the ratio of the corresponding 
 We recommend using point for prediction because SeeClick is mainly trained for predicting click points on GUIs.
 
 Thanks to [Qwen-VL](https://github.com/QwenLM/Qwen-VL) for their powerful model and wonderful open-sourced work.
+
+***
+### Downstream Agent Task
+Check [here](agent_tasks/readme_agent.md) to get details of training and testing on three downstream agent tasks.
+
 ***
 ### Citation
 ```
