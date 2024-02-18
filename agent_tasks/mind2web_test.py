@@ -85,9 +85,10 @@ parser.add_argument('--imgs_dir', type=str, required=True)
 parser.add_argument('--task', type=str, required=True)
 args = parser.parse_args()
 
-lora_path = args.model_path
+model_path = args.model_path
 qwen_path = args.qwen_path
-model = AutoPeftModelForCausalLM.from_pretrained(lora_path, device_map="cuda", trust_remote_code=True).eval()
+model = AutoModelForCausalLM.from_pretrained(model_path, device_map="cuda", trust_remote_code=True, bf16=True).eval() # load with model checkpoint
+# model = AutoPeftModelForCausalLM.from_pretrained(model_path, device_map="cuda", trust_remote_code=True).eval()  # load with lora checkpoint
 tokenizer = AutoTokenizer.from_pretrained(qwen_path, trust_remote_code=True)
 model.generation_config = GenerationConfig.from_pretrained(qwen_path, trust_remote_code=True)
 

@@ -20,8 +20,10 @@ Uncomment `lines 84-87` to visualize the annotation episode of mind2web.
 
 #### Evaluation on mind2web
 After fine-tuning LVLM on the above sft data, the evaluation was performed on three subsets.
+
+Alternatively, we provide the fine-tuned [checkpoint](https://huggingface.co/cckevinn/SeeClick-mind2web) of SeeClick for evaluation.
 ```
-python agent_tasks/mind2web_test.py --model_path xxxx/checkpoint-1000 --qwen_path xxxx/Qwen-VL-Chat --imgs_dir mind2web_imgs --task website
+python agent_tasks/mind2web_test.py --model_path xxxx/SeeClick-mind2web --qwen_path xxxx/Qwen-VL-Chat --imgs_dir mind2web_imgs --task website
 ```
 * `model_path`: the trained checkpoint of LVLM/SeeClick model
 * `qwen_path`: the origin checkpoint of Qwen-VL-Chat, for loading the tokenizer and config
