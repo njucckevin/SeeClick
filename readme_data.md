@@ -1,5 +1,7 @@
 # GUI Grounding Pre-training Data for SeeClick
 
+This document describes the acquisition of the pre-training data used by SeeClick.
+
 ***
 Tips: In GUI grounding data, the position of the target element is recorded in the `bbox` key, represented by `[left, top, right, bottom]`. 
 Each value is a [0, 1] decimal number indicating the ratio of the corresponding position to the width or height of the image.

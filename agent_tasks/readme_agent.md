@@ -1,4 +1,6 @@
 # SeeClick for Downstream Agent Tasks
+This document describes the steps to adapt SeeClick to downstream tasks, 
+including data download, preprocessing, visualization, model fine-tuning, and testing.
 
 ***
 ### Preparation
