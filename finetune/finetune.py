@@ -23,6 +23,7 @@ IGNORE_TOKEN_ID = LabelSmoother.ignore_index
 @dataclass
 class ModelArguments:
     model_name_or_path: Optional[str] = field(default="Qwen/Qwen-7B")
+    qwen_path: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -338,7 +339,7 @@ def train():
             if hasattr(model.transformer.visual, 'attn_pool'):
                 model.transformer.visual.attn_pool.requires_grad_(True)
     tokenizer = transformers.AutoTokenizer.from_pretrained(
-        model_args.model_name_or_path,
+        model_args.qwen_path,
         cache_dir=training_args.cache_dir,
         model_max_length=training_args.model_max_length,
         padding_side="right",

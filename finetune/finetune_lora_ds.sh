@@ -2,7 +2,7 @@
 export CUDA_DEVICE_MAX_CONNECTIONS=1
 DIR=`pwd`
 
-SAVE_NAME=sft_test             # 默认值
+SAVE_NAME=sft_test             # default values
 max_length=768
 micro_batch_size=16
 save_interval=1000
@@ -12,6 +12,7 @@ learning_rate=1e-5
 gradient_accumulation_steps=1
 nproc_per_node=1
 data_path=test
+qwen_ckpt=default_path
 pretrain_ckpt=default_path
 save_path=default_path
 
@@ -28,8 +29,9 @@ while [[ "$#" -gt 0 ]]; do
         --data-path) data_path="$2"; shift ;;
         --learning-rate) learning_rate="$2"; shift ;;
         --gradient-accumulation-steps) gradient_accumulation_steps="$2"; shift ;;
-        --pretrain_ckpt) pretrain_ckpt="$2"; shift ;;
-        --save_path) save_path="$2"; shift ;;
+        --qwen-ckpt) qwen_ckpt="$2"; shift ;;
+        --pretrain-ckpt) pretrain_ckpt="$2"; shift ;;
+        --save-path) save_path="$2"; shift ;;
         *) echo "Unknown parameter passed: $1"; exit 1 ;;
     esac
     shift
@@ -42,8 +44,9 @@ MASTER_ADDR=localhost
 MASTER_PORT=6001
 
 MODEL=${pretrain_ckpt}
+QWEN_PATH=${qwen_ckpt}
 DATA=${data_path}
-SAVE_PATH=${save_path}
+SAVE_PATH="${save_path}/${SAVE_NAME}"
 
 DISTRIBUTED_ARGS="
     --nproc_per_node $GPUS_PER_NODE \
@@ -55,6 +58,7 @@ DISTRIBUTED_ARGS="
 
 torchrun $DISTRIBUTED_ARGS finetune/finetune.py \
     --model_name_or_path $MODEL \
+    --qwen_path $QWEN_PATH \
     --data_path $DATA \
     --bf16 True \
     --fix_vit False \
