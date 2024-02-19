@@ -13,6 +13,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--imgs_dir', type=str, required=True)
 args = parser.parse_args()
 
+
 # show image with bbox
 def show_image_with_bbox(image, bbox=None):
 
@@ -31,6 +32,7 @@ def show_image_with_bbox(image, bbox=None):
         ax.add_patch(rect)
     plt.axis('off')
     plt.show()
+
 
 # convert action to prediction format
 def action2step(action, image_size):
