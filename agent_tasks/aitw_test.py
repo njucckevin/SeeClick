@@ -1,4 +1,7 @@
 # evaluation on aitw
+# This script refer to the official repo of AITW (https://github.com/google-research/google-research/tree/master/android_in_the_wild)
+# to calculate the action matching score
+
 import os
 import random
 import torch
@@ -15,6 +18,8 @@ from PIL import Image
 import numpy as np
 
 import action_matching
+
+logging.basicConfig(level=logging.INFO)
 
 
 # convert action to prediction format
