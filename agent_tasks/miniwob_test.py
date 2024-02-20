@@ -1,11 +1,8 @@
-# 在MiniWob环境中测试
-# MiniWoBCoordClick中点击位置是参考body元素的偏移量
-# 且当前selenium版本中是相对body元素中心的偏移量，因此点击位置需要校准
-# 在服务器配置MiniWob环境的step：
-# 1.下载chrome和chromedriver，遇到dkpg问题请在google上查找
-# 2.无图形界面的服务器需要headless模式
-# 3.可能需要禁掉各种http_proxy代理
-# 注意MiniWoBCoordClick点击位置需要body元素的偏移量，body元素的偏移量和窗口大小有关，可以在get_screenshot中查看
+# evaluation in MiniWob environment
+# Note1: the click position of MiniWoBCoordClick is the offset from body element, which is related to the
+# window size of chrome (the window size could be checked in get_screenshot function in env packages).
+# Note2: server without Graphical User Interface need to evaluate with the headless mode.
+# Note3: if a lot of html code appears and gets stuck, try to disable the proxy.
 
 import os
 import random
@@ -36,7 +33,6 @@ from synapse.envs.miniwob.action import (
 logging.basicConfig(level=logging.INFO)
 
 
-# 创建解析器
 parser = argparse.ArgumentParser()
 parser.add_argument('--model_path', type=str, required=True)
 parser.add_argument('--qwen_path', type=str, required=True)
@@ -57,12 +53,14 @@ random.seed(seed)
 
 model_path = args.model_path
 qwen_path = args.qwen_path
-model = AutoModelForCausalLM.from_pretrained(model_path, device_map="cuda", trust_remote_code=True, bf16=True).eval() # load with model checkpoint
-# model = AutoPeftModelForCausalLM.from_pretrained(model_path, device_map="cuda", trust_remote_code=True).eval()  # load with lora checkpoint
+# model = AutoModelForCausalLM.from_pretrained(model_path, device_map="cuda", trust_remote_code=True, bf16=True).eval() # load with model checkpoint
+model = AutoPeftModelForCausalLM.from_pretrained(model_path, device_map="cuda", trust_remote_code=True).eval()  # load with lora checkpoint
 tokenizer = AutoTokenizer.from_pretrained(qwen_path, trust_remote_code=True)
 model.generation_config = GenerationConfig.from_pretrained(qwen_path, trust_remote_code=True)
 
 miniwob_imgs_dir_temp = args.imgs_dir_temp
+if not os.path.exists(miniwob_imgs_dir_temp):
+    os.makedirs(miniwob_imgs_dir_temp)
 miniwob_train = json.load(open('../data/miniwob_data_train.json', 'r'))     # load tasks from train set
 miniwob_tasks = list(miniwob_train.keys())
 if args.env_name != "all" and args.env_name not in miniwob_tasks:
@@ -80,7 +78,7 @@ for env in tqdm(miniwob_tasks):
     print("Task: " + env)
     for j in tqdm(range(args.num_episodes)):
         traj = []
-        # 初始化MiniWob环境
+        # initial MiniWob environment
         seed_task = random.randint(0, 1000000)
         miniwob_env = MiniWoBEnv(subdomain=env, headless=args.headless)
         miniwob_env.reset(seed=seed_task, record_screenshots=True)
@@ -91,15 +89,14 @@ for env in tqdm(miniwob_tasks):
         previous_actions = []
         for k in range(task_max_step[env]):
 
-            # 获得MiniWob状态
+            # get the current state
             miniwob_state = miniwob_env.instance.get_state()
             state_screenshot = miniwob_state.screenshot
-            img_path = os.path.join(img_dir, args.model_path + '-' + env + '-' + str(
-                seed_task) + '-' + str(k) + '.jpg')
+            img_path = os.path.join(img_dir, env + '-' + str(seed_task) + '-' + str(k) + '.jpg')
             state_screenshot.save(img_path)
             goal = miniwob_state.utterance
 
-            # Agent生成下一步动作
+            # agent generate the next action
             previous_step = ""
             for i, action in enumerate(previous_actions[-4:]):
                 previous_step += 'Step' + str(i) + ': ' + action + ". "
@@ -118,9 +115,10 @@ for env in tqdm(miniwob_tasks):
                 action_pred = ast.literal_eval(response)
             except:
                 continue
-            # 将动作转换为MiniWob Action
+            # convert the predicted action to miniwob action that operate the chrome
             try:
                 if action_pred["action_type"] == 4:
+                    # the offset (150, 105) here is depended on the window size of chrome
                     click_x = action_pred['click_point'][0] * 160
                     click_y = action_pred['click_point'][1] * 210
                     miniwob_action = MiniWoBCoordClick(click_x - 150, click_y - 105)
@@ -131,11 +129,11 @@ for env in tqdm(miniwob_tasks):
                     print("action undefined")
                     input()
                     continue
-                # 执行动作，并判断是否结束
+                # execute the action and
                 _, reward, done, _ = miniwob_env.step(miniwob_action)
             except:
                 continue
-            # print(reward)
+            # determine if the episode is over, success (reward > 0.8) or fail (done)
             if reward > 0.8:
                 success += 1
                 for item in traj:

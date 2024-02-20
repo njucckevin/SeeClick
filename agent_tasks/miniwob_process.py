@@ -85,7 +85,3 @@ for task_name, data in tqdm(miniwob_train.items()):
 random.shuffle(train_step)
 print("Num of total step: " + str(len(train_step)))
 json.dump(train_step, open("../data/miniwob_train_sft.json", "w"))
-
-
-
-
