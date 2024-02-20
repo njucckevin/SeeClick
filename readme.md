@@ -12,7 +12,9 @@ Release Plans:
 - [x] GUI grounding benchmark: *ScreenSpot*
 - [x] Data for the GUI grounding Pre-training of SeeClick
 - [x] Inference code & model checkpoint
-- [ ] Other code and resources
+- [x] Other code and resources
+
+News: We release data and code for fine-tuning on all three downstream agent tasks.
 
 ***
 ### GUI Grounding Benchmark: *ScreenSpot*
@@ -93,7 +95,22 @@ Thanks to [Qwen-VL](https://github.com/QwenLM/Qwen-VL) for their powerful model 
 
 ***
 ### Downstream Agent Task
-Check [here](agent_tasks/readme_agent.md) to get details of training and testing on three downstream agent tasks.
+Check [here](agent_tasks/readme_agent.md) to get details of training and testing on three downstream agent tasks,
+which also provides a guideline for fine-tuning SeeClick.
+```
+bash finetune/finetune_lora_ds.sh --save-name SeeClick_test --max-length 704 --micro-batch-size 4 --save-interval 500 
+    --train-epochs 10 --nproc-per-node 2 --data-path xxxx/data_sft.json --learning-rate 3e-5 
+    --gradient-accumulation-steps 8 --qwen-ckpt xxxx/Qwen-VL-Chat --pretrain-ckpt xxxx/SeeClick-pretrain
+    --save-path xxxx/checkpoint_qwen
+```
+* `data-path`: generated sft data, the format can be found in [here](https://github.com/QwenLM/Qwen-VL#data-preparation)
+* `qwen-ckpt`: origin Qwen-VL ckpt path for loading tokenizer
+* `pretrain-ckpt`: base model for fine-tuning, e.g. SeeClick-pretrain or Qwen-VL
+* `save-path`: directory to save training checkpoints
+
+The fine-tuning scripts are similar to Qwen-VL, except for we use LoRA to fine-tune customized parameters, as in `finetune/finetune.py lines 315-327`.
+This scripts fine-tune pre-train LVLM with LoRA and multi-GPU training; for more option like full-finetuning, Q-LoRA and single-GPU training, please
+refer to [Qwen-VL](https://github.com/QwenLM/Qwen-VL/tree/master?tab=readme-ov-file#finetuning).
 
 ***
 ### Citation
