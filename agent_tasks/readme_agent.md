@@ -9,7 +9,7 @@ including data download, preprocessing, visualization, model fine-tuning, and te
 Note that according to [mind2web](https://github.com/OSU-NLP-Group/Mind2Web), please **DO NOT** redistribute the unzipped data files online.
 
 * AITW: Download the [screenshots](https://box.nju.edu.cn/f/96ba5115bae24eaaa44e/) and [annotations](https://box.nju.edu.cn/f/1245c74fc09b4565a235/) (train/val/test).
-Check the origin [AITW](https://github.com/google-research/google-research/tree/master/android_in_the_wild) project for details and deta usage.
+Check the origin [AITW](https://github.com/google-research/google-research/tree/master/android_in_the_wild) project for details and data usage.
 
 * MiniWob: Download the [screenshots](https://box.nju.edu.cn/f/ac0299ede1e44a93ac77/) and [annotations](https://box.nju.edu.cn/f/a84bb9e350e44adf8344/) (2.8K train set).
 These trajectories are rollout with a recent LLM agent framework [Synapse](https://github.com/ltzheng/Synapse), check their repo for more details.
