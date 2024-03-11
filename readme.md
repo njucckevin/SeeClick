@@ -14,7 +14,7 @@ Release Plans:
 - [x] Inference code & model checkpoint
 - [x] Other code and resources
 
-News: We release data and code for fine-tuning on all three downstream agent tasks.
+News: SeeClick will appear in [ICLR 2024 Workshop on LLM Agents](https://llmagents.github.io/) as a poster paper.
 
 ***
 ### GUI Grounding Benchmark: *ScreenSpot*
