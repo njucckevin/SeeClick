@@ -5,13 +5,26 @@ import task_prompts
 from tqdm import tqdm
 import os
 import random
+import argparse
 
-mobile_imgs = "/cpfs01/user/chengkanzhi/combined"
-web_imgs = "/cpfs01/user/chengkanzhi/seeclick_web_imgs"
-widgetcap_json = "/cpfs01/user/chengkanzhi/widget_captioning.json"
-ricosca_json = "/cpfs01/user/chengkanzhi/ricosca.json"
-screensum_json = "/cpfs01/user/chengkanzhi/screen_captioning.json"
-web_json = "/cpfs01/user/chengkanzhi/seeclick_web.json"
+
+parser = argparse.ArgumentParser(description="Process data for pre-training.")
+
+parser.add_argument("--mobile_imgs", required=True, help="Path to the directory containing mobile images.")
+parser.add_argument("--web_imgs", required=True, help="Path to the directory containing web images.")
+parser.add_argument("--widgetcap_json", required=True, help="Path to the widget captioning JSON file.")
+parser.add_argument("--ricosca_json", required=True, help="Path to the RICOSCA JSON file.")
+parser.add_argument("--screensum_json", required=True, help="Path to the screen captioning JSON file.")
+parser.add_argument("--web_json", required=True, help="Path to the seeclick web JSON file.")
+
+args = parser.parse_args()
+
+mobile_imgs = args.mobile_imgs
+web_imgs = args.web_imgs
+widgetcap_json = args.widgetcap_json
+ricosca_json = args.ricosca_json
+screensum_json = args.screensum_json
+web_json = args.web_json
 
 # widget captioning & RICOSCA
 widgetcap_train = json.load(open(widgetcap_json, "r"))
