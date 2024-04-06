@@ -27,7 +27,7 @@ args = parser.parse_args()
 qwen_path = args.qwen_path
 tokenizer = AutoTokenizer.from_pretrained(qwen_path, trust_remote_code=True)
 
-if args.model_name != 'Qwen-VL-Chat':
+if args.lora_path != 'Qwen-VL-Chat':
     # use lora
     lora_path = args.lora_path
     model = AutoPeftModelForCausalLM.from_pretrained(lora_path, device_map="cuda", trust_remote_code=True, bf16=True).eval()

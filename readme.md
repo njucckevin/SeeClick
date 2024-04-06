@@ -13,6 +13,7 @@ Release Plans:
 - [x] Data for the GUI grounding Pre-training of SeeClick
 - [x] Inference code & model checkpoint
 - [x] Other code and resources
+- [x] Code for pre-training and evaluation on ScreenSpot
 
 News: SeeClick will appear in [ICLR 2024 Workshop on LLM Agents](https://llmagents.github.io/) as a poster paper.
 
@@ -111,6 +112,37 @@ bash finetune/finetune_lora_ds.sh --save-name SeeClick_test --max-length 704 --m
 The fine-tuning scripts are similar to Qwen-VL, except for we use LoRA to fine-tune customized parameters, as in `finetune/finetune.py lines 315-327`.
 This scripts fine-tune pre-train LVLM with LoRA and multi-GPU training; for more option like full-finetuning, Q-LoRA and single-GPU training, please
 refer to [Qwen-VL](https://github.com/QwenLM/Qwen-VL/tree/master?tab=readme-ov-file#finetuning).
+
+***
+### Pre-training and Evaluation on ScreenSpot
+You can easily organize the above data yourself for model training and testing on ScreenSpot. 
+As an alternative, we provide a set of scripts used for data processing, pre-training, and testing on ScreenSpot.
+```
+cd pretrain
+```
+#### Data Processing for Pre-Training
+```
+python pretrain_process.py --mobile_imgs xxxx/combined --web_imgs xxxx/seeclick_web_imgs 
+    --widgetcap_json xxxx/widget_captioning.json --ricosca_json xxxx/ricosca.json 
+    --screensum_json xxxx/screen_captioning.json --web_json xxxx/seeclick_web.json 
+    --coco_imgs xxxx/coco/train2017 --llava_json xxxx/llava_instruct_150k.jsonl
+```
+Generate the dataset containing about 1M samples for continual pre-training at `../data/sft_train.json`.
+
+#### GUI Grounding Pre-training
+```
+cd ..
+bash finetune/finetune_lora_ds.sh --save-name seeclick_sft --max-length 768 --micro-batch-size 8 
+    --save-interval 4000 --train-epochs 3 --nproc-per-node 8 --data-path ./data/sft_train.json 
+    --learning-rate 3e-5 --gradient-accumulation-steps 1 --qwen-ckpt xxxx/Qwen-VL-Chat 
+    --pretrain-ckpt xxxx/Qwen-VL-Chat  --save-path xxxx/checkpoint_qwen
+```
+#### Evaluation on ScreenSpot
+```
+cd pretrain
+python screenspot_test.py --qwen_path xxxx/Qwen-VL-Chat --lora_path xxxx/checkpoint_qwen/seeclick_sft/checkpoint-20000 --screenspot_imgs xxxx/screenspot_imgs --screenspot_test xxxx/ScreenSpot --task all
+```
+
 
 ***
 ### Citation
