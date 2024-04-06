@@ -16,6 +16,8 @@ parser.add_argument("--widgetcap_json", required=True, help="Path to the widget 
 parser.add_argument("--ricosca_json", required=True, help="Path to the RICOSCA JSON file.")
 parser.add_argument("--screensum_json", required=True, help="Path to the screen captioning JSON file.")
 parser.add_argument("--web_json", required=True, help="Path to the seeclick web JSON file.")
+parser.add_argument("--coco_imgs", required=True, help="Path to the directory coco train2017 images.")
+parser.add_argument("--llava_json", required=True, help="Path to the LLaVA JSON file.")
 
 args = parser.parse_args()
 
@@ -25,8 +27,10 @@ widgetcap_json = args.widgetcap_json
 ricosca_json = args.ricosca_json
 screensum_json = args.screensum_json
 web_json = args.web_json
+coco_imgs = args.coco_imgs
+llava_json = args.llava_json
 
-# widget captioning & RICOSCA
+# widget captioning & RICOSCA grounding
 widgetcap_train = json.load(open(widgetcap_json, "r"))
 ricosca_train = json.load(open(ricosca_json, "r"))
 mobile_text_2_point = []
@@ -237,7 +241,7 @@ print("Num of web_ocr_bbox: " + str(len(web_ocr_bbox)))
 
 # llava 150k
 llava_data = []
-with open("/cpfs01/user/chengkanzhi/mPLUG-Owl-main/data/llava_instruct_150k.jsonl", 'r') as f:
+with open(llava_json, "r") as f:
     for line in f:
         llava_data.append(json.loads(line))
 
@@ -254,7 +258,7 @@ for i, conversation in tqdm(enumerate(llava_data)):
     assert num_img == 1
 
     img_filename = conversation['image']
-    img_path = os.path.join('/cpfs01/user/chengkanzhi/coco/train2017', img_filename)
+    img_path = os.path.join(coco_imgs, img_filename)
 
     conversations_new = []
     for j, item in enumerate(conversation['conversations']):
