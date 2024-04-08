@@ -156,3 +156,7 @@ python screenspot_test.py --qwen_path xxxx/Qwen-VL-Chat --lora_path xxxx/checkpo
       primaryClass={cs.HC}
 }
 ```
+
+***
+### License 
+This project incorporates specific datasets and checkpoints governed by their original licenses. Users are required to adhere to all terms of these licenses. No additional restrictions are imposed by this project beyond those specified in the original licenses.
