@@ -14,6 +14,7 @@ Release Plans:
 - [x] Inference code & model checkpoint
 - [x] Other code and resources
 - [x] Code for pre-training and evaluation on ScreenSpot
+- [x] Code for collecting pre-training data
 
 News: SeeClick will appear in [ICLR 2024 Workshop on LLM Agents](https://llmagents.github.io/) as a poster paper.
 
@@ -142,7 +143,9 @@ bash finetune/finetune_lora_ds.sh --save-name seeclick_sft --max-length 768 --mi
 cd pretrain
 python screenspot_test.py --qwen_path xxxx/Qwen-VL-Chat --lora_path xxxx/checkpoint_qwen/seeclick_sft/checkpoint-20000 --screenspot_imgs xxxx/screenspot_imgs --screenspot_test xxxx/ScreenSpot --task all
 ```
-
+***
+### Collecting Pre-training Data from Common Crawl
+We used Selenium to crawl web pages from Common Crawl. See details in this [repo](https://github.com/chuyg1005/seeclick-crawler).
 
 ***
 ### Citation
