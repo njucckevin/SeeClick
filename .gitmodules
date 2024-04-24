@@ -1,0 +1,3 @@
+[submodule "seeclick-crawler"]
+	path = seeclick-crawler
+	url = https://github.com/chuyg1005/seeclick-crawler
