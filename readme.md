@@ -16,7 +16,7 @@ Release Plans:
 - [x] Code for pre-training and evaluation on ScreenSpot
 - [x] Code for collecting pre-training data
 
-News: SeeClick will appear in [ICLR 2024 Workshop on LLM Agents](https://llmagents.github.io/) as a poster paper.
+News: SeeClick is accepted by ACL 2024.
 
 ***
 ### GUI Grounding Benchmark: *ScreenSpot*
