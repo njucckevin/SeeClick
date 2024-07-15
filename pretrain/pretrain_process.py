@@ -138,7 +138,7 @@ for i, item in tqdm(enumerate(web_train)):
     for ele in item["elements"]:
         if len([item for item in ele["bbox"] if item < 0]) != 0:
             continue
-        if len(ele["instruction"]) > 60:
+        if len(ele["instruction"]) > 60 or ele["instruction"].strip() == '':
             continue
         if ('{' in ele["instruction"]) or ('}' in ele["instruction"]):
             continue
