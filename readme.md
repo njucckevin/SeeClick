@@ -150,13 +150,22 @@ We used Selenium to crawl web pages from Common Crawl. See details in this [repo
 ***
 ### Citation
 ```
-@misc{cheng2024seeclick,
-      title={SeeClick: Harnessing GUI Grounding for Advanced Visual GUI Agents}, 
-      author={Kanzhi Cheng and Qiushi Sun and Yougang Chu and Fangzhi Xu and Yantao Li and Jianbing Zhang and Zhiyong Wu},
-      year={2024},
-      eprint={2401.10935},
-      archivePrefix={arXiv},
-      primaryClass={cs.HC}
+@inproceedings{cheng2024seeclick,
+    title = "{S}ee{C}lick: Harnessing {GUI} Grounding for Advanced Visual {GUI} Agents",
+    author = "Cheng, Kanzhi  and
+      Sun, Qiushi  and
+      Chu, Yougang  and
+      Xu, Fangzhi  and
+      YanTao, Li  and
+      Zhang, Jianbing  and
+      Wu, Zhiyong",
+    booktitle = "Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+    month = aug,
+    year = "2024",
+    address = "Bangkok, Thailand",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2024.acl-long.505",
+    pages = "9313--9332"
 }
 ```
 
