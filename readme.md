@@ -63,6 +63,8 @@ Before running, set up the environment and install the required packages.
 ```angular2html
 pip install -r requirements.txt
 ```
+> Note: If you want to fine-tune the model, you should follow the [setup](https://github.com/njucckevin/SeeClick/blob/main/agent_tasks/readme_agent.md) and install with requirements_agent.txt.
+
 Then,
 ```python
 import torch
