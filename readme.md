@@ -16,7 +16,8 @@ Release Plans:
 - [x] Code for pre-training and evaluation on ScreenSpot
 - [x] Code for collecting pre-training data
 
-News: SeeClick is accepted by ACL 2024.
+News: SeeClick is accepted by ACL 2024. Other following works [OS-Atlas](https://arxiv.org/abs/2410.23218), [OS-Genesis](https://arxiv.org/abs/2412.19723) are also released !
+
 
 ***
 ### GUI Grounding Benchmark: *ScreenSpot*
